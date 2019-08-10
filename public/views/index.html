@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>comment-list</title>
+        <link rel="stylesheet" href="/public/lib/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="/public/css/index.css">
+    </head>
+    <body>
+        <div class="title"><p>The Drop Of Time</p></div>
+        <div class="comment">
+            <p>add alarmClock</p>
+            <button class="btn btn-primary" id="btn">ADD</button>
+        </div> 
+        <ul class="list-group comment-list">
+             <li class="list-group-item">
+                <span class="time">Time</span> 
+                <span class="content">Content</span>
+                <span class="name">Name</span>
+            </li>
+         {{each comments}}
+            <li class="list-group-item">
+                <span class="time">{{$value.time}}</span> 
+                <span class="content">{{$value.content}}</span>
+                <span class="name">{{$value.name}}</span>
+             
+		<span class="del"> <form action="/delete" method="GET" role="form" class="submit-form">
+			 <input type="hidden" value= {{$value.ID}} name="ID" id="ID" />
+            	    <button type="submit" class="btn btn-primary">del</button>
+       			 </form>
+		</span>
+
+       
+
+
+
+
+            </li>
+            {{/each}}
+        </ul>
+        <script src="/public/js/index.js"></script>
+    </body>
+</html>

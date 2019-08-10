@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/public/lib/bootstrap/dist/css/bootstrap.css">
+        <title>Add alarm</title>
+        <style>
+.submit-form{
+    width: 600px;
+    margin: 0 auto;
+}</style>
+    </head>
+    <body>
+
+        <form action="/add" method="GET" role="form" class="submit-form">
+            <legend>Add alarm</legend>
+            <div class="form-group">
+                <label for="name">Your name:</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="please input your big name"  maxlength="10" >
+            </div>
+                <div class="form-group">
+                    <label for="time">Time set:</label>
+                    <input type="text" name="time"class="form-control"  placeholder="xx:xx" required minlength="5" maxlength="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="content">Lable</label>
+                    <input type="text" name="content"  class="form-control"   maxlength="50"></textarea>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="beepkind">beepkind</label>
+                    <input type="text" name="beepkind"  class="form-control" value="default"  maxlength="50"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">submit</button>
+        </form>
+    </body>
+</html>
