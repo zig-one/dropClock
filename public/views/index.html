@@ -1,15 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
+<!DOCTYPE HTML>
+<html>
+<head>
+ <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>comment-list</title>
         <link rel="stylesheet" href="/public/lib/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="/public/css/index.css">
+
+  <style type="text/css">
+    #messages { padding: 0px; list-style-type: none;}
+    #messages li { padding: 2px 0px; border-bottom: 1px solid #ccc; }
+  </style>
+  <script src="/public/lib/jquery.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+	function clean(){
+		document.getElementById("messages").innerHTML="";
+		document.getElementById("beeping").innerHTML="";
+	}
+	function play(){
+        document.getElementById('myMusic').play()
+	 
+	};
+      $(function() {
+          var socket = io.connect();
+          socket.on('connect', function() {
+              socket.on('message', function(message) {
+                  $('#messages').append(message);
+		   document.getElementById('beeping').innerHTML= "<button onclick=\"play()\" class=\"btn btn-info\" id=\"bttn\">PLAY</button>";
+		setTimeout(clean,20*1000);
+              });
+          });
+      });
+
+  </script>
+  
+  
+  
     </head>
     <body>
         <div class="title"><p>The Drop Of Time</p></div>
+	<div class="beeping" id="messages"></div> <div class="beeping" id="beeping"></div> 
         <div class="comment">
             <p>add alarmClock</p>
             <button class="btn btn-primary" id="btn">ADD</button>
@@ -42,4 +74,9 @@
         </ul>
         <script src="/public/js/index.js"></script>
     </body>
+
+
 </html>
+
+
+

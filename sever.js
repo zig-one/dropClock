@@ -6,7 +6,7 @@ var exec = require('child_process').exec;
 let filename1="timeset.json";
 let filename2="id.json";
 let timedrops=[];
-let ID="0";
+let ID=0;
 
 //初始化
 function readdata(){
@@ -28,17 +28,19 @@ function savedata(){
 }
 
 
-// 创建HTTP服务器
-let http = require('http')
-let fs = require('fs')
+
+
+
+var fs = require('fs'),
+    http = require('http'),
+    sio = require('socket.io');
 let url = require('url')
 let template = require('art-template')
-
-http.createServer((req, res) => {
+var server = http.createServer(function(req, res) {
     let obj = url.parse(req.url, true) // 得到url模板解析后的Url对象，传入第二个参数“true”，将form表单提交的查询字符串query转换成对象
     let pathname = obj.pathname
     let query = obj.query
-    if (pathname === '/') {
+   if (pathname === '/') {
         fs.readFile('./public/views/index.html', (err, data) => {
             if (err) {
                 return res.end('404 NOT FOUND')
@@ -48,14 +50,14 @@ http.createServer((req, res) => {
             })
             res.end(htmlStr)
         })
-    } else if (pathname.indexOf('/public/') === 0){
+    }  else if (pathname.indexOf('/public/') === 0){
         fs.readFile('.'+pathname, (err, data) => {
             if (err) {
                 return res.end('404 NOT FOUND')
             }
             res.end(data)
         })
-    } else if (pathname ==='/post') {
+    }  else if (pathname ==='/post') {
         fs.readFile('./public/views/post.html', (err, data) => {
             if (err) {
                 return res.end('404 NOT FOUND')
@@ -72,8 +74,7 @@ http.createServer((req, res) => {
             savedata();
         } // 放置用户手动输入'/add'，导致query为空
         res.end()  // 结束响应，不能少
-    }
-	else if (pathname === '/delete') {
+    }else if (pathname === '/delete') {
         	res.statusCode = 302      // 设置响应状态码为302(重定向)
        		 res.setHeader('location', '/') // 设置响应头location，告诉浏览器重定向地址
 		ID=query.ID;
@@ -82,23 +83,27 @@ http.createServer((req, res) => {
    	  	   arr.splice(index, 1);
    		 }
 		});
-
-
        	 	//console.log(query);
      	   res.end()  // 结束响应，不能少
     }
-    else {
-        fs.readFile('./public/views/404.html', (err, data) => {
-            if (err) {
-                return res.end('404 NOT FOUND')
-            }
-            res.end(data)
-        })
-    }  
-}).listen(3000, () => {
-    console.log('running...')
-})
-//删除部分
+     
+
+});
+server.listen(8000, function() {
+  console.log('Server listening at http://localhost:8000/');
+});
+// Attach the socket.io server
+io = sio.listen(server);
+
+
+
+// Define a message handler
+io.sockets.on('connection', function (socket) {
+  socket.on('message', function (msg) {});});
+
+//	setInterval((socket)=>{io.emit('message'," <audio id=\"myMusic\" autoplay=\"autoplay\"> <source src=\"/public/music/4.mp3\" type=\"audio/mpeg\"></audio>  ");},10*1000);
+
+
 
 
 
@@ -124,7 +129,6 @@ function alarm(){
                 BEEP(timedrops[item].beepkind);
                 timedrops[item].enable="true";
                 setTimeout(reset,2*60*1000,item);
-
             }
         }
     }
@@ -132,8 +136,16 @@ function alarm(){
 setInterval(alarm,500);
 
 function BEEP(beepkind){
-    if(beepkind=="") exec("mplayer 2.*");
-    else exec("mplayer "+beepkind+".*");
+    if(beepkind=="") beepkind="defaut";
+     exec("mplayer ./public/music/"+beepkind+".*");
+     io.emit('message'," <audio id=\"myMusic\" autoplay=\"autoplay\" controls=\"controls\" > <source src=\"/public/music/"+beepkind+".mp3\" type=\"audio/mpeg\"></audio>");
+	//console.log("emit");
 }
 
 BEEP("start");
+
+
+
+
+
+
