@@ -1,17 +1,19 @@
 {
   "name": "dropclock2",
   "description": "Simple nodejs and Socket.io app",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "server.js",
   "dependencies": {
-    "socket.io": ""
+    "socket.io": "",
+    "lowdb":"",
+    "art-template":""
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node sever.js ",
+    "start": "node app.js ",
     "set": "npm install",
-    "clear": "rm timeset.json id.json"
+    "clear": "rm ./data/timeset.json ./data/id.json"
   },
   "repository": {
     "type": "git",
