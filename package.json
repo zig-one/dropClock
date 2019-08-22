@@ -9,8 +9,7 @@
     "art-template":"",
     "node-schedule":"",
     "lodash":"",
-    "lodash-id":"",
-    "china-time":""
+    "lodash-id":""
   },
   "devDependencies": {},
   "scripts": {
