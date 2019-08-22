@@ -6,7 +6,11 @@
   "dependencies": {
     "socket.io": "",
     "lowdb":"",
-    "art-template":""
+    "art-template":"",
+    "node-schedule":"",
+    "lodash":"",
+    "lodash-id":"",
+    "china-time":""
   },
   "devDependencies": {},
   "scripts": {

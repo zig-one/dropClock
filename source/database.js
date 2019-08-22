@@ -1,58 +1,38 @@
-let filename1="./data/timeset.json";
-let filename2="./data/id.json";
-let timedrops=[];
-let ID=0;
+const lodashId = require('lodash-id');
+const lodash = require('lodash');
+const low = require('lowdb');
+const FileSync = require('lowdb/adapters/FileSync');
+const adapter = new FileSync('./data/db.json');
+const db = low(adapter);
+db._.mixin(lodashId);
 
-//初始化
-function readdata(){
-    var fs=require('fs');
-    if(fs.existsSync(filename1)){
-        timedrops=JSON.parse(fs.readFileSync(filename1));
-    }
-   if(fs.existsSync(filename2)){
-        ID=parseInt(JSON.parse(fs.readFileSync(filename2)));
-    }
-}
-readdata();
+const collection = db.defaults({ timeset: [] }).get('timeset');
 
 
-//保存时间
-function savedata(){  
-    var fs = require('fs');
-    fs.writeFileSync(filename1, JSON.stringify(timedrops));
-    fs.writeFileSync(filename2, JSON.stringify(ID));
-}
-
-
-function add(item){
-	item.enable="false";
-	item.ID=ID;ID=ID+1;
-	timedrops.unshift(item);
-	savedata();
+function additem(item){
+    //Insert a new alarm
+  //  lodash.insert(db.timeset, item);
+    collection.insert(item).write();
+   
 }
 
 function deleteitem(ID){
-	timedrops.forEach(function(item, index, arr) {
-  		  if(item.ID==ID) {
-   	  	   arr.splice(index, 1);
-   		 }
-		});
-savedata();
+   collection.removeById(ID).write();
 }
 
 
-function foreach(fun){
-	 for(item in timedrops){fun(timedrops[item])}
+function foreach(fun){	//console.log("coll",collection);
+    var data=collection.value();
+	 for(item in data){fun(data[item])}
 }
 
-//闹钟部分
 
 
 module.exports={
 foreach:foreach,
-add:add,
+additem:additem,
 deleteitem:deleteitem,
-timedrops:timedrops
+timeset:collection.value()
 };
 
 

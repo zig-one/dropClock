@@ -1,4 +1,4 @@
-var timetable=require('../source/database.js');
+var timedb=require('../source/database.js');
 
 var fs = require('fs'),
     http = require('http');
@@ -15,7 +15,7 @@ var server = http.createServer(function(req, res) {
                 return res.end('404 NOT FOUND')
             }
             let htmlStr = template.render(data.toString(), {
-                comments:timetable.timedrops
+                comments:timedb.timeset
             })
             res.end(htmlStr)
         })
@@ -37,13 +37,13 @@ var server = http.createServer(function(req, res) {
         res.statusCode = 302      // 设置响应状态码为302(重定向)
         res.setHeader('location', '/') // 设置响应头location，告诉浏览器重定向地址
         if (query.time) {
-           timetable.add(query);
+           timedb.additem(query);
         } // 放置用户手动输入'/add'，导致query为空
         res.end()  // 结束响应，不能少
     }else if (pathname === '/delete') {
         	res.statusCode = 302      // 设置响应状态码为302(重定向)
        		res.setHeader('location', '/') // 设置响应头location，告诉浏览器重定向地址
-		timetable.deleteitem(query.ID);
+		    timedb.deleteitem(query.ID);
        	 	//console.log(query);
      	   res.end()  // 结束响应，不能少
     }

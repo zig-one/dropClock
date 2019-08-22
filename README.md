@@ -56,8 +56,16 @@ update to 2.0.1
 
 Time drips like drops of water .  In a little drop of time, we feel the time itself.
 
-这次更新我模块化了一下代码并改了标题并改写了音乐
+这次更新我模块化了一下代码并改了标题并改写了音乐。
 
 This time I modularized the code,changed the title and the music
 
 ​	
+
+2.0.2更新2019.8.22
+
+update to 2.0.2
+
+这次更新,使用了lowdb、node-schedule。并且一点用也没有
+
+This time I blend lowdb,node-schedule,chinatime in it. Of course , I have made it much more terrible.
