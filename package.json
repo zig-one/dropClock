@@ -1,15 +1,23 @@
 {
   "name": "dropclock2",
   "description": "Simple nodejs and Socket.io app",
-  "version": "2.0.1",
-  "main": "server.js",
+  "version": "2.1.0",
+  "main": "app.js",
+  "bin": "app.js",
+  "pkg": {
+    "assets": [
+      "node_modules/socket.io/**/*"
+    ]
+  },
   "dependencies": {
+    "art-template": "",
+    "cnpm": "^6.1.1",
+    "lodash": "",
+    "lodash-id": "",
+    "lowdb": "",
+    "node-schedule": "",
     "socket.io": "",
-    "lowdb":"",
-    "art-template":"",
-    "node-schedule":"",
-    "lodash":"",
-    "lodash-id":""
+    "assets": ""
   },
   "devDependencies": {},
   "scripts": {

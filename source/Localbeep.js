@@ -3,5 +3,6 @@
 var exec = require('child_process').exec; 
 function BEEP(beepkind){
      exec("mplayer ./public/music/"+beepkind+".*");
+     console.log("localbeep.tried")
 }
 module.exports = BEEP;

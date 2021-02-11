@@ -1,5 +1,5 @@
-let server=require('./server.js').server;//BEEP(beepkind)
-var sio = require('socket.io');
+let server = require('./server.js').server;//BEEP(beepkind)
+var sio = require('socket.io')(server);
 //console.log("Add");
 // Attach the socket.io server
 io = sio.listen(server);
@@ -10,6 +10,7 @@ io.sockets.on('connection', function (socket) {
 function broadcast(message){
 //console.log("emit");
      io.emit('message',message);
+     console.log("emit");
 	
 }
 

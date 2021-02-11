@@ -40,7 +40,7 @@ The music is written by me with Musescore2.And it's a bit frightening.
 
 我从pubdreamcc那学了很多
 
-- [x] I have learnt a lot from https://github.com/pubdreamcc/Node.js
+-  I have learnt a lot from https://github.com/pubdreamcc/Node.js
 
 
 

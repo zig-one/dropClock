@@ -3,3 +3,4 @@ btn.onclick = function () {
   window.location = '/post'
 }
 
+

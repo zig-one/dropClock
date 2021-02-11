@@ -1,5 +1,6 @@
 var timedb=require('../source/database.js');
 
+
 var fs = require('fs'),
     http = require('http');
 
@@ -46,7 +47,14 @@ var server = http.createServer(function(req, res) {
 		    timedb.deleteitem(query.ID);
        	 	//console.log(query);
      	   res.end()  // 结束响应，不能少
-    }
+    }else if (pathname === '/beeponetime') {
+            let BEEP=require('./beep.js');//BEEP(beepkind)
+            BEEP("default");
+            console.log("get beep");
+            res.statusCode = 302      // 设置响应状态码为302(重定向)
+            res.setHeader('location', '/') // 设置响应头location，告诉浏览器重定向地址
+             res.end()  // 结束响应，不能少
+}
      
 
 });
