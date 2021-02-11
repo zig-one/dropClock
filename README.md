@@ -44,6 +44,14 @@ The music is written by me with Musescore2.And it's a bit frightening.
 
 
 
+2.1.0更新2021.02.11
+
+update to 2.1.0
+
+​	添加了一个逼逼叫的按钮。
+   add one button to beep.
+
+
 
 
 2.0.1更新2019.8.17
